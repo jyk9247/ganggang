@@ -1,0 +1,79 @@
+---
+title: "마크다운-웹페이지"
+
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# R을 이용한 웹페이지
+
+## 작성자 소개
+
+### 정윤경
+나는 갱갱이야
+
+### 심리학과
+심리통계 시러시러
+
+### 좋아하는 것들
++ 친구
+  - 최은혁
+  - 지서이
++ 애착 물건
+  - 스마트폰1
+  - 가방
++ 음식
+  - 자장면
+  - 육개장
+  
+### 내사진
+
+![정윤경](commonCASK28YT.jpg)
+
+
+
+## 자료 분석 1
+
+### 필요한 라이브러리 불러오기     
+실행 때 나오는 메시지를 보여주지 않는다.
+```{r message=F}
+library(ggplot2)
+library(dplyr)
+```
+
+자동차 연비 데이터인 mpg 데이터를 살펴보자.
+
+```{r}
+head(mpg)
+str(mpg)
+```
+
+mpg 데이터에서 자동차의 배기량(displ)과 도시연비(cty)의 관계를 그래프로 살펴보자
+
+```{r}
+ggplot(mpg, aes(x=displ, y=hwy)) + 
+  geom_point(aes(color=class, size=displ)) +
+  stat_smooth(method = 'loess')
+```
+
+
+## 자료 분석 2
+강원도 도시대기측정결과를 지도에 표현해보자.
+
+### 지도 관련 패키지 설치 및 불러오기
++ 공간 지도 분석을 위한 패키지
+ - maps: 세계 지도 데이터베이스
+ - mapproj: 지도 상에 위도와 경도를 표시
+ - ggplot2: map_data()를 이용하여 지도정보를 R로 불러오기
+ - ggiraphExtra : 단계 구분도 표시
+
+```{r message=F}
+library(maps)
+library(mapproj)
+library(ggplot2)
+library(ggiraphExtra)
+```
+
